@@ -1,0 +1,23 @@
+version: '2'
+services:
+  client:
+    environment:
+      - 'PGHOST=pg2'
+      - 'PGPORT=5432'
+      - 'PGPASSWORD=mysecretpassword'
+      - 'PORT=3000'
+    image: 'tictactoe'
+    build:
+      context: '.'
+      dockerfile: 'Dockerfile'
+    ports:
+      - '3000:3000'
+    # Mun gerast eftir á útaf depends_on
+    command: node run.js
+    entrypoint: ./migratescript.sh
+    depends_on:
+      - 'database'
+  database:
+    image: postgres
+    ports:
+      - '5432:5432'
