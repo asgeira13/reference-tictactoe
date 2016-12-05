@@ -14,7 +14,15 @@ export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 #Make .env for docker_compose image to use GIT_COMMIT
 echo GIT_COMMIT=$GIT_COMMIT > .env
 echo Building app
-npm build
+
+#install npm in root
+npm install
+#install npm in client
+cd client
+npm install
+cd ..
+#build
+npm run build
 
 rc=$?
 if [[ $rc != 0 ]] ; then
