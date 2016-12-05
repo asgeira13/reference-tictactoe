@@ -2,6 +2,9 @@
 
 echo Cleaning...
 rm -rf ./dist
+#make dist directory
+mkdir dist
+mkdir dist/public
 
 if [ -z "$GIT_COMMIT" ]; then
   export GIT_COMMIT=$(git rev-parse HEAD)
