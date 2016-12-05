@@ -8,4 +8,3 @@ RUN export NODE_PATH=.
 RUN chmod u+x ./migratescript.sh
 ENV NODE_PATH .
 EXPOSE 3000
-#ENTRYPOINT ["./migratescript.sh"]

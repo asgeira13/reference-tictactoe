@@ -11,7 +11,8 @@ fi
 # Remove .git from url in order to get https link to repo (assumes https url for GitHub)
 export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
-
+#Make .env for docker_compose image to use GIT_COMMIT
+echo GIT_COMMIT=$GIT_COMMIT > .env
 echo Building app
 npm build
 
@@ -41,10 +42,10 @@ _EOF_
 
 cp ./Dockerfile ./build/
 
-cd dist
+#cd dist
 echo Building docker image
 
-docker build -t asgeira13/tictactoe:$GIT_COMMIT .
+docker build -t asgeira13/tictactoe:latest -t asgeira13/tictactoe:$GIT_COMMIT .
 
 rc=$?
 if [[ $rc != 0 ]] ; then
@@ -52,7 +53,8 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
-docker push asgeira13/tictactoe:$GIT_COMMIT
+#docker push asgeira13/tictactoe:$GIT_COMMIT
+docker push asgeira13/tictactoe
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Docker push failed " $rc

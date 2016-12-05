@@ -6,7 +6,9 @@ services:
       - 'PGPORT=5432'
       - 'PGPASSWORD=mysecretpassword'
       - 'PORT=3000'
-    image: 'tictactoe'
+      - 'DATABASE=database'
+      - 'NODE_ENV=prod'
+    image: 'asgeira13/tictactoe:${GIT_COMMIT}'
     build:
       context: '.'
       dockerfile: 'Dockerfile'
@@ -14,7 +16,7 @@ services:
       - '3000:3000'
     # Mun gerast eftir á útaf depends_on
     command: node run.js
-    entrypoint: ./migratescript.sh
+    entrypoint: ./migratescript.sh # prod
     depends_on:
       - 'database'
   database:
