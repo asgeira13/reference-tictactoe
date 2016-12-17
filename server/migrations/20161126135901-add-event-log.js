@@ -18,7 +18,7 @@ exports.up = function(db,callback) {
   db.createTable('eventlog', {
     timestamp:{ type:'datetime'},
     id: { type: 'string', primaryKey: true },
-    json: 'string'
+    json: 'string',
   }, callback);};
 
 exports.down = function(db) {

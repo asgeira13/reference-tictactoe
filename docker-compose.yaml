@@ -7,7 +7,7 @@ services:
       - 'PGPASSWORD=mysecretpassword'
       - 'PORT=3000'
       - 'DATABASE=database'
-      - 'NODE_ENV=prod'
+      - 'NODE_ENV=production'
     image: 'asgeira13/tictactoe:${GIT_COMMIT}'
     build:
       context: '.'
@@ -16,7 +16,7 @@ services:
       - '3000:3000'
     # Mun gerast eftir á útaf depends_on
     command: node run.js
-    entrypoint: ./migratescript.sh # prod
+    entrypoint: ./migratescript.sh production
     depends_on:
       - 'database'
   database:
